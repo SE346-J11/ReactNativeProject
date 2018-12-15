@@ -23,6 +23,7 @@ class DetailMovie extends Component {
       popularity: '',
       budget: '',
       title: '',
+      overview: '',
       original_language: '',
       vote_average: '',
       vote_count: '',
@@ -51,6 +52,7 @@ class DetailMovie extends Component {
           popularity: responseJson.popularity,
           budget: responseJson.budget,
           title: responseJson.title,
+          overview: responseJson.overview,
           original_language: responseJson.original_language,
           vote_average: responseJson.vote_average,
           vote_count: responseJson.vote_count,
@@ -82,6 +84,7 @@ class DetailMovie extends Component {
           </View>
           <View style={styles.content}>
             <Text>Title: {this.state.title}</Text>
+            <Text>Overview: {this.state.overview}</Text>
             <Text>Language: {this.state.original_language}</Text>
             <Text>Time: {this.state.runtime} minutes</Text>
             <Text>Release date: {this.state.release_date}</Text>
