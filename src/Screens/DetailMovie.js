@@ -4,7 +4,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
+  ImageBackground,
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
@@ -79,17 +79,16 @@ class DetailMovie extends Component {
       return (
         <View style={styles.container}>
           <View style={{flex: 1}}>
-            <Image style={[styles.image, {width: Dimensions.get('window').width}]}
-              source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}} />
+            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
+              source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
+                <Text style={styles.title}>{this.state.title}</Text>
+            </ImageBackground>
           </View>
           <View style={styles.content}>
-            <Text>Title: {this.state.title}</Text>
-            <Text>Overview: {this.state.overview}</Text>
-            <Text>Language: {this.state.original_language}</Text>
+            <Text>{this.state.overview}</Text>
             <Text>Time: {this.state.runtime} minutes</Text>
             <Text>Release date: {this.state.release_date}</Text>
-            <Text>Vote: {this.state.vote_count}</Text>
-            <Text>Average: {this.state.vote_average}</Text>
+            <Text>Vote average: {this.state.vote_average}</Text>
             <Text>Popularity: {this.state.popularity}</Text>
           </View>
         </View>
@@ -106,6 +105,16 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     height: 300,
+  },
+  title: {
+    position: 'absolute', 
+    bottom: 0,
+    padding: 4, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    color: '#fff',
+    fontSize: 30,
+    backgroundColor:'#000'
   },
   content: {
     flex: 1,
