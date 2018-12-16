@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 import {
   StyleSheet,
   Text,
@@ -79,7 +80,7 @@ class DetailMovie extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <View style={{flex: 1}}>
+          <View>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
                 <LinearGradient style={styles.linearGradient} colors={['rgba(0, 0, 0, 0)','rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', '#000']}>
@@ -87,17 +88,29 @@ class DetailMovie extends Component {
                 </LinearGradient>
             </ImageBackground>
           </View>
-          <View style={styles.rating}>
-            <Text>{this.state.vote_average}</Text>
-          </View>         
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4}}>Rating: </Text>
+            <Rating
+              //showRating
+              type="star"
+              fractions={1}
+              startingValue={this.state.vote_average/2}
+              readonly
+              imageSize={15}
+              style={{marginTop: 8}}
+            />    
+          </View>
           <View style={styles.overview}>
-            <Text>{this.state.overview}</Text>
+            <Text>Overview: {this.state.overview}</Text>
           </View>
           <View style={styles.content}>
-            <Text>Time: {this.state.runtime} minutes</Text>
+            <Text>Runtime: {this.state.runtime} minutes</Text>
             <Text>Release date: {this.state.release_date}</Text>
             <Text>Vote: {this.state.vote_count}</Text>
             <Text>Popularity: {this.state.popularity}</Text>
+          </View>
+          <View style={{}}>
+
           </View>
         </View>
       );
@@ -111,13 +124,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   image: {
-    flex: 1,
     height: 300,
   },
   title: {
     padding: 4, 
     color: '#fff',
-    fontSize: 20,
+    fontSize: 22,
   },
   linearGradient: {
     position: 'absolute', 
@@ -126,11 +138,11 @@ const styles = StyleSheet.create({
     right:0,
   },
   rating: {
-    marginTop: 4,
-    padding: 4,
+   
   },
   overview: {
     padding: 4,
+    marginTop: 4,
   },
   content: {
     flex: 1,
