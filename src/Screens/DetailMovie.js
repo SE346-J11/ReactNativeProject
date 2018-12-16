@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   StyleSheet,
   Text,
@@ -81,14 +82,21 @@ class DetailMovie extends Component {
           <View style={{flex: 1}}>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
-                <Text style={styles.title}>{this.state.title}</Text>
+                <LinearGradient style={styles.linearGradient} colors={['rgba(0, 0, 0, 0)','rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', '#000']}>
+                    <Text style={styles.title}>{this.state.title}</Text>
+                </LinearGradient>
             </ImageBackground>
           </View>
-          <View style={styles.content}>
+          <View style={styles.rating}>
+            <Text>{this.state.vote_average}</Text>
+          </View>         
+          <View style={styles.overview}>
             <Text>{this.state.overview}</Text>
+          </View>
+          <View style={styles.content}>
             <Text>Time: {this.state.runtime} minutes</Text>
             <Text>Release date: {this.state.release_date}</Text>
-            <Text>Vote average: {this.state.vote_average}</Text>
+            <Text>Vote: {this.state.vote_count}</Text>
             <Text>Popularity: {this.state.popularity}</Text>
           </View>
         </View>
@@ -107,18 +115,25 @@ const styles = StyleSheet.create({
     height: 300,
   },
   title: {
+    padding: 4, 
+    color: '#fff',
+    fontSize: 20,
+  },
+  linearGradient: {
     position: 'absolute', 
     bottom: 0,
-    padding: 4, 
-    justifyContent: 'center', 
-    alignItems: 'center',
-    color: '#fff',
-    fontSize: 30,
-    backgroundColor:'#000'
+    left: 0,
+    right:0,
+  },
+  rating: {
+    marginTop: 4,
+    padding: 4,
+  },
+  overview: {
+    padding: 4,
   },
   content: {
     flex: 1,
-    marginTop: 4,
     padding: 4,
   },
   loading: {
