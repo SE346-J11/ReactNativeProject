@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
   ImageBackground,
   Dimensions,
@@ -79,7 +81,7 @@ class DetailMovie extends Component {
       )
     } else {
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <View>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
@@ -109,10 +111,25 @@ class DetailMovie extends Component {
             <Text>Vote: {this.state.vote_count}</Text>
             <Text>Popularity: {this.state.popularity}</Text>
           </View>
-          <View style={{}}>
-
+          <View style={styles.shareListIcons}>
+            <View style={styles.list} >
+              <IonIcons
+                name="md-add-circle-outline"
+                color="grey"
+                size={25}
+              />
+              <Text style={{padding: 4}}>Favourite</Text>
+            </View>
+            <View style={styles.share} >
+              <IonIcons 
+                name="md-share"
+                color="grey"
+                size={25}
+              />
+              <Text style={{padding: 4}}>Share</Text>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       );
     }
   }
@@ -145,8 +162,21 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   content: {
-    flex: 1,
     padding: 4,
+  },
+  shareListIcons: {
+    marginTop: 15,
+    flexDirection: 'row',
+  },
+  list: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  share: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loading: {
     flex: 1,
