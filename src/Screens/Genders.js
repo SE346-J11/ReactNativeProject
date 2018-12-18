@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {StackNavigator,} from 'react-navigation';
 import Constants from '../utils/Constants'
+
 class Genders extends Component {
   static navigationOptions = {
     title: 'Genders',
