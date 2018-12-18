@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
-  Image,
+  ImageBackground,
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
+import Constants from '../utils/Constants';
 
 class DetailMovie extends Component {
   static navigationOptions = {
@@ -23,6 +28,7 @@ class DetailMovie extends Component {
       popularity: '',
       budget: '',
       title: '',
+      overview: '',
       original_language: '',
       vote_average: '',
       vote_count: '',
@@ -41,7 +47,7 @@ class DetailMovie extends Component {
   }
 
   getMovieFromApi(id) {
-    return fetch('https://api.themoviedb.org/3/movie/' + id + '?api_key=317b43ddb7e19b9eae9f67bcbd4fa317')
+    return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -51,6 +57,7 @@ class DetailMovie extends Component {
           popularity: responseJson.popularity,
           budget: responseJson.budget,
           title: responseJson.title,
+          overview: responseJson.overview,
           original_language: responseJson.original_language,
           vote_average: responseJson.vote_average,
           vote_count: responseJson.vote_count,
@@ -75,21 +82,55 @@ class DetailMovie extends Component {
       )
     } else {
       return (
-        <View style={styles.container}>
-          <View style={{flex: 1}}>
-            <Image style={[styles.image, {width: Dimensions.get('window').width}]}
-              source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}} />
+        <ScrollView style={styles.container}>
+          <View>
+            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
+              source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
+                <LinearGradient style={styles.linearGradient} colors={['rgba(0, 0, 0, 0)','rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', '#000']}>
+                    <Text style={styles.title}>{this.state.title}</Text>
+                </LinearGradient>
+            </ImageBackground>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4}}>Rating: </Text>
+            <Rating
+              //showRating
+              type="star"
+              fractions={1}
+              startingValue={this.state.vote_average/2}
+              readonly
+              imageSize={15}
+              style={{marginTop: 8}}
+            />    
+          </View>
+          <View style={styles.overview}>
+            <Text>Overview: {this.state.overview}</Text>
           </View>
           <View style={styles.content}>
-            <Text>Title: {this.state.title}</Text>
-            <Text>Language: {this.state.original_language}</Text>
-            <Text>Time: {this.state.runtime} minutes</Text>
+            <Text>Runtime: {this.state.runtime} minutes</Text>
             <Text>Release date: {this.state.release_date}</Text>
             <Text>Vote: {this.state.vote_count}</Text>
-            <Text>Average: {this.state.vote_average}</Text>
             <Text>Popularity: {this.state.popularity}</Text>
           </View>
-        </View>
+          <View style={styles.shareListIcons}>
+            <View style={styles.list} >
+              <IonIcons
+                name="md-add-circle-outline"
+                color="grey"
+                size={25}
+              />
+              <Text style={{padding: 4}}>Favourite</Text>
+            </View>
+            <View style={styles.share} >
+              <IonIcons 
+                name="md-share"
+                color="grey"
+                size={25}
+              />
+              <Text style={{padding: 4}}>Share</Text>
+            </View>
+          </View>
+        </ScrollView>
       );
     }
   }
@@ -101,13 +142,42 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   image: {
-    flex: 1,
     height: 300,
   },
-  content: {
-    flex: 1,
-    marginTop: 4,
+  title: {
+    padding: 4, 
+    color: '#fff',
+    fontSize: 22,
+  },
+  linearGradient: {
+    position: 'absolute', 
+    bottom: 0,
+    left: 0,
+    right:0,
+  },
+  rating: {
+   
+  },
+  overview: {
     padding: 4,
+    marginTop: 4,
+  },
+  content: {
+    padding: 4,
+  },
+  shareListIcons: {
+    marginTop: 15,
+    flexDirection: 'row',
+  },
+  list: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  share: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loading: {
     flex: 1,
