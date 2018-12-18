@@ -145,15 +145,19 @@ const styles = StyleSheet.create({
     height: 300,
   },
   title: {
-    padding: 4, 
+    //padding: 4, 
     color: '#fff',
-    fontSize: 22,
+    fontSize: 25,
+    position: 'absolute', 
+    bottom: 8,
+    left: 4,
   },
   linearGradient: {
     position: 'absolute', 
     bottom: 0,
     left: 0,
     right:0,
+    height: '30%',
   },
   rating: {
    

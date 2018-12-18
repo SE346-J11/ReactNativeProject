@@ -8,9 +8,11 @@ import {
   ImageBackground,
   Dimensions,
   ActivityIndicator,
+  TouchableHighlight,
 } from 'react-native';
 import {StackNavigator,} from 'react-navigation';
-import Constants from '../utils/Constants'
+import Constants from '../utils/Constants';
+import Movies from '../Screens/Movies';
 
 class Genders extends Component {
   static navigationOptions = {
@@ -66,14 +68,20 @@ class Genders extends Component {
           style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
-            <TouchableOpacity onPress={() => navigate('movies', {id: rowData.id})}>
+            <View style={styles.item}>
+              <View style={styles.firstRow}>
+                <Text style={{marginLeft: 0, width: '80%',  color: '#fff',}}>{rowData.name}</Text>
+                <TouchableHighlight
+                  onPress={() => navigate('movies', {id: rowData.id})}>
+                  <Text style={{color: '#fff',}}> See all >> </Text>
+                </TouchableHighlight>
+              </View>
               <View>
                 <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}, {marginVertical: 2}]}
-                  source={require("../Avengers.png")} >   
-                      <Text style={{fontSize: 20, textAlign: 'center', lineHeight: 100,  color: '#fff',}}>{rowData.name}</Text>
-                </ImageBackground>
+                    source={require("../Avengers.png")} >   
+                  </ImageBackground>
+              </View>
             </View>
-            </TouchableOpacity>
           }
         />
       );
@@ -91,6 +99,9 @@ const styles = StyleSheet.create({
     margin: 2,
     paddingBottom: 4,
     color: '#fff',
+  },
+  firstRow: {
+    flexDirection: 'row',
   },
   image: {
     height: 100,
