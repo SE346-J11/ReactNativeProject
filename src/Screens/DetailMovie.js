@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import {Rating, AirbnbRating} from 'react-native-ratings';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
@@ -13,14 +13,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Constants from '../utils/Constants';
+import PlayVideo from './PlayVideo';
 
 class DetailMovie extends Component {
   static navigationOptions = {
     title: 'Movie Detail',
   };
 
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
       id: '',
       adult: '',
@@ -40,17 +41,21 @@ class DetailMovie extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const {navigation} = this.props;
-    const id = navigation.getParam('id', 'NO-ID');
-    this.getMovieFromApi(id);
+    const id = navigation.getParam ('id', 'NO-ID');
+    this.getMovieFromApi (id);
+    this.findVideoFromId(id)
   }
-
-  getMovieFromApi(id) {
-    return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
+   
+  getMovieFromApi (id) {
+    return fetch (
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`
+    )
+      .then (response => response.json ())
+      .then (responseJson => {
+        console.log (responseJson);
+        this.setState ({
           id: responseJson.id,
           adult: responseJson.adult,
           backdrop_path: responseJson.backdrop_path,
@@ -67,44 +72,71 @@ class DetailMovie extends Component {
           revenue: responseJson.revenue,
           isLoading: false,
         });
+        console.log (this.state);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch (error => {
+        console.error (error);
       });
   }
 
-  render() {
+  findVideoFromId = (id) => {
+    return fetch (
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${Constants.API_KEY}`
+    )
+      .then (response => response.json ())
+      .then (responseJson => {
+        console.log (responseJson.results);
+        this.setState ({
+          videoUrl: responseJson.results[0].key,
+        });
+      })
+      .catch (error => {
+        console.error (error);
+      });
+  };
+  render () {
+    const {navigate} = this.props.navigation;
+    const {videoUrl} = this.state
     if (this.state.isLoading) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator size="large" style={styles.colorLoading} />
         </View>
-      )
+      );
     } else {
       return (
         <ScrollView style={styles.container}>
           <View>
-            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
+            <PlayVideo videoUrl={videoUrl}></PlayVideo>
+            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width,marginTop:20}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
                 <LinearGradient style={styles.linearGradient} colors={['rgba(0, 0, 0, 0)','rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', '#000']}>
                     <Text style={styles.title}>{this.state.title}</Text>
                 </LinearGradient>
             </ImageBackground>
           </View>
+          <View style={styles.title}>
+            <Text style={styles.titleText}>{this.state.title}</Text>
+          </View>
+          <View style={styles.overview}>
+            <Text>{this.state.overview}</Text>
+          </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4}}>Rating: </Text>
+            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4}}>
+              Rating:{' '}
+            </Text>
             <Rating
               //showRating
               type="star"
               fractions={1}
-              startingValue={this.state.vote_average/2}
+              startingValue={this.state.vote_average / 2}
               readonly
               imageSize={15}
               style={{marginTop: 8}}
-            />    
+            />
           </View>
-          <View style={styles.overview}>
-            <Text>Overview: {this.state.overview}</Text>
+          <View style={styles.title}>
+            <Text>{this.state.title} trailer</Text>
           </View>
           <View style={styles.content}>
             <Text>Runtime: {this.state.runtime} minutes</Text>
@@ -113,20 +145,12 @@ class DetailMovie extends Component {
             <Text>Popularity: {this.state.popularity}</Text>
           </View>
           <View style={styles.shareListIcons}>
-            <View style={styles.list} >
-              <IonIcons
-                name="md-add-circle-outline"
-                color="grey"
-                size={25}
-              />
+            <View style={styles.list}>
+              <IonIcons name="md-add-circle-outline" color="grey" size={25} />
               <Text style={{padding: 4}}>Favourite</Text>
             </View>
-            <View style={styles.share} >
-              <IonIcons 
-                name="md-share"
-                color="grey"
-                size={25}
-              />
+            <View style={styles.share}>
+              <IonIcons name="md-share" color="grey" size={25} />
               <Text style={{padding: 4}}>Share</Text>
             </View>
           </View>
@@ -145,19 +169,17 @@ const styles = StyleSheet.create({
     height: 300,
   },
   title: {
-    padding: 4, 
+    padding: 4,
     color: '#fff',
     fontSize: 22,
   },
   linearGradient: {
-    position: 'absolute', 
+    position: 'absolute',
     bottom: 0,
     left: 0,
-    right:0,
+    right: 0,
   },
-  rating: {
-   
-  },
+  rating: {},
   overview: {
     padding: 4,
     marginTop: 4,
@@ -185,7 +207,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   colorLoading: {
-    color: "#0000ff",
+    color: '#0000ff',
+  },
+  titleText: {
+    padding: 4,
+    color: 'orange',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 });
 

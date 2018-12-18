@@ -10,6 +10,7 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Genders from './src/Screens/Genders';
 import Movies from './src/Screens/Movies';
 import DetailMovie from './src/Screens/DetailMovie';
+import PlayVideo from './src/Screens/PlayVideo';
 
 export default class App extends Component {
   render() {
@@ -21,7 +22,8 @@ const RootStack = createStackNavigator(
   {
     genders: {screen: Genders},
     movies: {screen: Movies},
-    detailMovie: {screen: DetailMovie}
+    detailMovie: {screen: DetailMovie},
+    playVideo:{screen:PlayVideo}
   },
   {
     initialRouteName: 'genders',
