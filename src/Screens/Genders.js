@@ -5,6 +5,8 @@ import {
   View,
   TouchableOpacity,
   ListView,
+  ImageBackground,
+  Dimensions,
   ActivityIndicator,
 } from 'react-native';
 import {StackNavigator,} from 'react-navigation';
@@ -58,31 +60,40 @@ class Genders extends Component {
         </View>
       )
     } else {
-   
+      
       return (
         <ListView
           style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <TouchableOpacity onPress={() => navigate('movies', {id: rowData.id})}>
-              <Text style={styles.item}>{rowData.name}</Text>
+              <View>
+                <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}, {marginVertical: 2}]}
+                  source={require("../Avengers.png")} >   
+                      <Text style={{fontSize: 20, textAlign: 'center', lineHeight: 100,  color: '#fff',}}>{rowData.name}</Text>
+                </ImageBackground>
+            </View>
             </TouchableOpacity>
           }
         />
       );
+      console.error(error);
     }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#020014',
   },
   item: {
     fontSize: 20,
     margin: 2,
     paddingBottom: 4,
-    color: '#000000',
+    color: '#fff',
+  },
+  image: {
+    height: 100,
   },
   loading: {
     flex: 1,

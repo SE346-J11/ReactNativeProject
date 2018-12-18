@@ -69,6 +69,7 @@ class Movies extends Component {
       const width = (Dimensions.get('window').width / 3) - 4;
       return (
         <ListView
+          //style={styles.container}
           contentContainerStyle={styles.list}
           dataSource={this.state.results}
           renderRow={(rowData) =>
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    backgroundColor: '#020014',
   },
   loading: {
     flex: 1,

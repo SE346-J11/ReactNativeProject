@@ -12,7 +12,7 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
-import Constants from '../utils/Constants'
+import Constants from '../utils/Constants';
 
 class DetailMovie extends Component {
   static navigationOptions = {
@@ -47,8 +47,7 @@ class DetailMovie extends Component {
   }
 
   getMovieFromApi(id) {
-    return fetch(`https://api.themoviedb.org/3/movie/${id}/?api_key=${Constants.API_KEY}`)
-b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
+    return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -87,13 +86,13 @@ b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
           <View>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
-                <LinearGradient style={styles.linearGradient} colors={['rgba(0, 0, 0, 0)','rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', '#000']}>
+                <LinearGradient style={styles.linearGradient} colors={['rgba(2, 0, 20, 0)','rgba(2, 0, 20, 0.5)', 'rgba(2, 0, 20, 0.8)', '#020014']}>
                     <Text style={styles.title}>{this.state.title}</Text>
                 </LinearGradient>
             </ImageBackground>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4}}>Rating: </Text>
+            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4, color: '#fff'}}>Rating: </Text>
             <Rating
               //showRating
               type="star"
@@ -105,13 +104,13 @@ b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
             />    
           </View>
           <View style={styles.overview}>
-            <Text>Overview: {this.state.overview}</Text>
+            <Text style={{color: '#fff'}}>Overview: {this.state.overview}</Text>
           </View>
           <View style={styles.content}>
-            <Text>Runtime: {this.state.runtime} minutes</Text>
-            <Text>Release date: {this.state.release_date}</Text>
-            <Text>Vote: {this.state.vote_count}</Text>
-            <Text>Popularity: {this.state.popularity}</Text>
+            <Text style={{color: '#fff'}}>Runtime: {this.state.runtime} minutes</Text>
+            <Text style={{color: '#fff'}}>Release date: {this.state.release_date}</Text>
+            <Text style={{color: '#fff'}}>Vote: {this.state.vote_count}</Text>
+            <Text style={{color: '#fff'}}>Popularity: {this.state.popularity}</Text>
           </View>
           <View style={styles.shareListIcons}>
             <View style={styles.list} >
@@ -120,7 +119,7 @@ b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
                 color="grey"
                 size={25}
               />
-              <Text style={{padding: 4}}>Favourite</Text>
+              <Text style={{padding: 4, color: '#fff'}}>To List</Text>
             </View>
             <View style={styles.share} >
               <IonIcons 
@@ -128,7 +127,7 @@ b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
                 color="grey"
                 size={25}
               />
-              <Text style={{padding: 4}}>Share</Text>
+              <Text style={{padding: 4, color: '#fff'}}>Share</Text>
             </View>
           </View>
         </ScrollView>
@@ -140,7 +139,7 @@ b742b1e3c65ee5f6b79afb64e554aed3e2ec78c9
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#020014',
   },
   image: {
     height: 300,
