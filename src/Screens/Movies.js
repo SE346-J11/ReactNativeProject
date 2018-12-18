@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {StackNavigator,} from 'react-navigation';
+import Constants from '../utils/Constants';
 
 class Movies extends Component {
   static navigationOptions = {
@@ -39,7 +40,7 @@ class Movies extends Component {
   }
 
   getMoviesFromApi(id) {
-    return fetch('https://api.themoviedb.org/3/genre/' + id + '/movies?api_key=317b43ddb7e19b9eae9f67bcbd4fa317')
+    return fetch(`https://api.themoviedb.org/3/genre/${id}/movies?api_key=${Constants.API_KEY}`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

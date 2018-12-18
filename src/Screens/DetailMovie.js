@@ -8,7 +8,7 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
-
+import Constants from '../utils/Constants'
 class DetailMovie extends Component {
   static navigationOptions = {
     title: 'Movie Detail',
@@ -41,7 +41,7 @@ class DetailMovie extends Component {
   }
 
   getMovieFromApi(id) {
-    return fetch('https://api.themoviedb.org/3/movie/' + id + '?api_key=317b43ddb7e19b9eae9f67bcbd4fa317')
+    return fetch(`https://api.themoviedb.org/3/movie/${id}/?api_key=${Constants.API_KEY}`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
