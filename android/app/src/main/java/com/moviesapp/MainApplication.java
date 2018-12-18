@@ -1,8 +1,12 @@
 package com.moviesapp;
 
 import android.app.Application;
-
+// Add Intent
+import android.content.Intent;    
+import android.os.Bundle;
+// 
 import com.facebook.react.ReactApplication;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeYouTube(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new RNGestureHandlerPackage()

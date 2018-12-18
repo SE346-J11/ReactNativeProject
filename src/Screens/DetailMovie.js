@@ -13,6 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Constants from '../utils/Constants';
+import VideoPlayer from './VideoPlayer';
 
 class DetailMovie extends Component {
   static navigationOptions = {
@@ -44,6 +45,7 @@ class DetailMovie extends Component {
     const {navigation} = this.props;
     const id = navigation.getParam('id', 'NO-ID');
     this.getMovieFromApi(id);
+    this.getVideoUrlFromId(id)
   }
 
   getMovieFromApi(id) {
@@ -73,7 +75,20 @@ class DetailMovie extends Component {
       });
   }
 
+  getVideoUrlFromId(id) {
+    return fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${Constants.API_KEY}`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          videoUrl:responseJson.results[0].key
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   render() {
+    const {videoUrl}= this.state
     if (this.state.isLoading) {
       return (
         <View style={styles.loading}>
@@ -84,6 +99,7 @@ class DetailMovie extends Component {
       return (
         <ScrollView style={styles.container}>
           <View>
+            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
                 <LinearGradient style={styles.linearGradient} colors={['rgba(2, 0, 20, 0)','rgba(2, 0, 20, 0.5)', 'rgba(2, 0, 20, 0.8)', '#020014']}>
