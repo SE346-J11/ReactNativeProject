@@ -151,13 +151,13 @@ class DetailMovie extends Component {
       return (
         <ScrollView style={styles.container}>
           <View>
-            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
             <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
                 <LinearGradient style={styles.linearGradient} colors={['rgba(2, 0, 20, 0)','rgba(2, 0, 20, 0.5)', 'rgba(2, 0, 20, 0.8)', '#020014']}>
                     <Text style={styles.title}>{this.state.title}</Text>
                 </LinearGradient>
             </ImageBackground>
+            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={{marginTop: 5, width: '13%', paddingLeft: 4, color: '#fff'}}>Rating: </Text>

@@ -70,16 +70,20 @@ class Genders extends Component {
           renderRow={(rowData) =>
             <View style={styles.item}>
               <View style={styles.firstRow}>
-                <Text style={{marginLeft: 0, width: '80%',  color: '#fff',}}>{rowData.name}</Text>
+                <Text style={{fontSize:22, marginLeft: 5, flex:1,justifyContent:'flex-start', color: '#fff',alignItems:'flex-start'}}>{rowData.name}</Text>
                 <TouchableHighlight
-                  onPress={() => navigate('movies', {id: rowData.id})}>
+                  onPress={() => navigate('movies', {id: rowData.id})}
+                  style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end'}}
+                  >
                   <Text style={{color: '#fff',}}> See all >> </Text>
                 </TouchableHighlight>
               </View>
               <View>
-                <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}, {marginVertical: 2}]}
-                    source={require("../Avengers.png")} >   
+                <TouchableOpacity onPress={() => navigate('movies', { id: rowData.id })}>
+                  <ImageBackground style={[styles.image, { width: Dimensions.get('window').width }, { marginVertical: 2 }]}
+                    source={require("../Avengers.png")} >
                   </ImageBackground>
+                </TouchableOpacity>
               </View>
             </View>
           }
@@ -102,6 +106,7 @@ const styles = StyleSheet.create({
   },
   firstRow: {
     flexDirection: 'row',
+    justifyContent:'space-between'
   },
   image: {
     height: 100,
