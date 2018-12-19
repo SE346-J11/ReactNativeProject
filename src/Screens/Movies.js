@@ -58,7 +58,6 @@ class Movies extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
-
     if (this.state.isLoading) {
       return (
         <View style={styles.loading}>

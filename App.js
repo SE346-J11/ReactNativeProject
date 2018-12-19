@@ -10,7 +10,7 @@ import {createStackNavigator, createAppContainer,HeaderBarItem} from 'react-navi
 import Genders from './src/Screens/Genders';
 import Movies from './src/Screens/Movies';
 import DetailMovie from './src/Screens/DetailMovie';
-
+import VideoPlayer from './src/Screens/VideoPlayer';
 export default class App extends Component {
   render() {
     console.disableYellowBox = true;
@@ -22,7 +22,7 @@ const RootStack = createStackNavigator(
   {
     genders: {screen: Genders},
     movies: {screen: Movies},
-    detailMovie: {screen: DetailMovie}
+    detailMovie: {screen: DetailMovie},
   },
   {
     initialRouteName: 'genders',

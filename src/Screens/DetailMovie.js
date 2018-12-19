@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import {Rating, AirbnbRating} from 'react-native-ratings';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
@@ -29,8 +29,8 @@ class DetailMovie extends Component {
     title: 'Movie Detail',
   };
 
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
       id: '',
       adult: '',
@@ -51,18 +51,21 @@ class DetailMovie extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const {navigation} = this.props;
     const id = navigation.getParam('id', 'NO-ID');
     this.getMovieFromApi(id);
     this.getVideoUrlFromId(id)
   }
-
-  getMovieFromApi(id) {
-    return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
+   
+  getMovieFromApi (id) {
+    return fetch (
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${Constants.API_KEY}`
+    )
+      .then (response => response.json ())
+      .then (responseJson => {
+        console.log (responseJson);
+        this.setState ({
           id: responseJson.id,
           adult: responseJson.adult,
           backdrop_path: responseJson.backdrop_path,
@@ -79,12 +82,12 @@ class DetailMovie extends Component {
           revenue: responseJson.revenue,
           isLoading: false,
         });
+        console.log (this.state);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch (error => {
+        console.error (error);
       });
   }
-
   getVideoUrlFromId(id) {
     return fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${Constants.API_KEY}`)
       .then((response) => response.json())
@@ -146,12 +149,12 @@ class DetailMovie extends Component {
         <View style={styles.loading}>
           <ActivityIndicator size="large" style={styles.colorLoading} />
         </View>
-      )
+      );
     } else {
       return (
         <ScrollView style={styles.container}>
           <View>
-            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width}]}
+            <ImageBackground style={[styles.image, {width: Dimensions.get('window').width,marginTop:20}]}
               source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + this.state.backdrop_path}}>
                 <LinearGradient style={styles.linearGradient} colors={['rgba(2, 0, 20, 0)','rgba(2, 0, 20, 0.5)', 'rgba(2, 0, 20, 0.8)', '#020014']}>
                     <Text style={styles.title}>{this.state.title}</Text>
@@ -165,11 +168,11 @@ class DetailMovie extends Component {
               //showRating
               type="star"
               fractions={1}
-              startingValue={this.state.vote_average/2}
+              startingValue={this.state.vote_average / 2}
               readonly
               imageSize={15}
               style={{marginTop: 8}}
-            />    
+            />
           </View>
           <View style={styles.overview}>
             <Text style={{color: '#fff'}}>Overview: {this.state.overview}</Text>
@@ -225,7 +228,7 @@ const styles = StyleSheet.create({
     left: 4,
   },
   linearGradient: {
-    position: 'absolute', 
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right:0,
@@ -234,6 +237,7 @@ const styles = StyleSheet.create({
   rating: {
    
   },
+  rating: {},
   overview: {
     padding: 4,
     marginTop: 4,
@@ -244,6 +248,7 @@ const styles = StyleSheet.create({
   shareListIcons: {
     marginTop: 15,
     flexDirection: 'row',
+    marginLeft: 10,
   },
   list: {
     flexDirection: 'column',
@@ -261,7 +266,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   colorLoading: {
-    color: "#0000ff",
+    color: '#0000ff',
+  },
+  titleText: {
+    padding: 4,
+    color: 'orange',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 });
 
