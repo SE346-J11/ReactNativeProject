@@ -1,10 +1,5 @@
 package com.moviesapp;
-
 import android.app.Application;
-// Add Intent
-import android.content.Intent;    
-import android.os.Bundle;
-// 
 import com.facebook.react.ReactApplication;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -18,8 +13,20 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.appevents.AppEventsLogger;
+
+
 public class MainApplication extends Application implements ReactApplication {
 
+  // Callback manager
+   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+ 
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -52,5 +59,8 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    FacebookSdk.sdkInitialize(getApplicationContext());
+    AppEventsLogger.activateApp(this); //add here
   }
+
 }

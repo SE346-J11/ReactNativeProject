@@ -6,13 +6,14 @@ import {
   ListView,
 } from 'react-native';
 
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import {createStackNavigator, createAppContainer,HeaderBarItem} from 'react-navigation';
 import Genders from './src/Screens/Genders';
 import Movies from './src/Screens/Movies';
 import DetailMovie from './src/Screens/DetailMovie';
 
 export default class App extends Component {
   render() {
+    console.disableYellowBox = true;
     return <MoviesApp/>;
   }
 }

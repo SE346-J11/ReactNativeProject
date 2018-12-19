@@ -14,6 +14,15 @@ import {
 } from 'react-native';
 import Constants from '../utils/Constants';
 import VideoPlayer from './VideoPlayer';
+// fbshare
+import FBSDK,{ ShareDialog, LoginManager } from 'react-native-fbsdk';
+
+const shareLinkContent = {
+  contentType: 'link',
+  contentUrl: 'https://facebook.com',
+  contentDescription: 'Wow, check out this great site!',
+};
+
 
 class DetailMovie extends Component {
   static navigationOptions = {
@@ -38,6 +47,7 @@ class DetailMovie extends Component {
       release_date: '',
       revenue: '',
       isLoading: true,
+      shareLinkContent:shareLinkContent
     };
   }
 
@@ -87,6 +97,48 @@ class DetailMovie extends Component {
         console.error(error);
       });
   }
+
+  onPressShare = ()=>{
+    let tmp = this;
+    ShareDialog.canShow(this.state.shareLinkContent).then(
+       (canShow) => {
+         console.log(canShow)
+        if (canShow) {
+          return ShareDialog.show(tmp.state.shareLinkContent);
+        }
+      }
+    ).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log('Share cancelled');
+        } else {
+          console.log('Share success with postId: '
+            + result.postId);
+        }
+      },
+      function (error) {
+        console.log('Share fail with error: ' + error);
+      }
+    );
+  }
+
+  onLogin=()=>{
+     LoginManager.logInWithReadPermissions(['public_profile', 'email', 'user_friends']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log("Login cancelled");
+        } else {
+          console.log(
+            "Login success with permissions: " +
+            result.grantedPermissions.toString()
+          );
+        }
+      },
+      function (error) {
+        console.log("Login fail with error: " + error);
+      }
+    );
+  }
   render() {
     const {videoUrl}= this.state
     if (this.state.isLoading) {
@@ -130,20 +182,24 @@ class DetailMovie extends Component {
           </View>
           <View style={styles.shareListIcons}>
             <View style={styles.list} >
-              <IonIcons
-                name="md-add-circle-outline"
-                color="grey"
-                size={25}
-              />
-              <Text style={{padding: 4, color: '#fff'}}>To List</Text>
+              <TouchableOpacity onPress={()=>alert('Chức năng chưa hoàn thiện')}>
+                <IonIcons
+                  name="md-add-circle-outline"
+                  color="grey"
+                  size={25}
+                />
+                <Text style={{ padding: 4, color: '#fff' }}>To List</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.share} >
-              <IonIcons 
-                name="md-share"
-                color="grey"
-                size={25}
-              />
-              <Text style={{padding: 4, color: '#fff'}}>Share</Text>
+              <TouchableOpacity onPress={() => alert('Chức năng chưa hoàn thiện')}>
+                <IonIcons
+                  name="md-share"
+                  color="grey"
+                  size={25}
+                />
+                <Text style={{ padding: 4, color: '#fff' }}>Share</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
