@@ -1,12 +1,14 @@
 # React Native Movies Review
 
-React Native App with the same style as Netflix for android and iOS . I released a serie of videos on Youtube with a walkthrough explaining every part of this application.Movies source from themoviedb.org
+React Native App with the same style as Netflix for android and iOS . I released a serie of videos on Youtube with a walkthrough explaining every part of this application. Movies source from themoviedb.org
 
-![Image of React Native Netflix App]()
+![Image of React Native Movies Review App](../Screenshots/Genders.png)
+![Image of React Native Movies Review App](../Screenshots/Movies.png)
+![Image of React Native Movies Review App](../Screenshots/Movie_Detail_1.png)
+![Image of React Native Movies Review App](../Screenshots/Movie_Detail_2.png)
 
 Server
 -----
-
     themoviedb.org and youtube.com
 
 Dependences used
@@ -30,9 +32,9 @@ Dependences used
     "react-native-youtube": "^1.1.0",
     
     "react-navigation": "^3.0.8"
+
 Installation
 ------------
-
     $ clone this repo
     $ npm install
     $ react-native upgrade

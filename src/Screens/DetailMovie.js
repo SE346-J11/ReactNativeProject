@@ -160,7 +160,6 @@ class DetailMovie extends Component {
                     <Text style={styles.title}>{this.state.title}</Text>
                 </LinearGradient>
             </ImageBackground>
-            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={{marginTop: 5, width: '13%', paddingLeft: 4, color: '#fff'}}>Rating: </Text>
@@ -205,6 +204,7 @@ class DetailMovie extends Component {
               </TouchableOpacity>
             </View>
           </View>
+          <VideoPlayer style={styles.trailer} videoUrl={videoUrl}></VideoPlayer>
         </ScrollView>
       );
     }
@@ -273,6 +273,9 @@ const styles = StyleSheet.create({
     color: 'orange',
     fontSize: 22,
     fontWeight: 'bold',
+  },
+  trailer: {
+    flex: 1,
   },
 });
 
