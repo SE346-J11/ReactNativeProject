@@ -2,10 +2,12 @@
 
 React Native App with the same style as Netflix for android and iOS. I released a serie of videos on Youtube with a walkthrough explaining every part of this application. Movies source from themoviedb.org
 
-![Image of React Native Movies Review App](src/Screenshots/Genders.png)
-![Image of React Native Movies Review App](src/Screenshots/Movies.png)
-![Image of React Native Movies Review App](src/Screenshots/Movie_Detail_1.png)
-![Image of React Native Movies Review App](src/Screenshots/Movie_Detail_2.png)
+Sreenshots
+---------
+<p>
+   <img src="src/Screenshots/Genders.png" height = "480" width="270"> <img src="src/Screenshots/Movies.png" height = "480" width="270">
+</p>
+
 
 Server
 -----
