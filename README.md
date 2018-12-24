@@ -5,7 +5,7 @@ React Native App with the same style as Netflix for android and iOS. I released 
 Sreenshots
 ---------
 <p>
-   <img src="src/Screenshots/Genders.png" height = "480" width="270"> <img src="src/Screenshots/Movies.png" height = "480" width="270">
+   <img src="src/Screenshots/Genders.png" height = "480" width="270"> <img src="src/Screenshots/Movies.png" height = "480" width="270"> <img src="src/Screenshots/Movie_Detail_1.png" height = "480" width="270"> <img src="src/Screenshots/Movie_Detail_2.png" height = "480" width="270">
 </p>
 
 
