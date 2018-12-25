@@ -19,7 +19,7 @@ export default class VideoPlayer extends Component {
         <YouTube
           videoId={'WDkg3h8PCVU'}
           play={
-            play // The YouTube video ID
+            play
           }
           hidden={false}
           apiKey={Constants.YOUTUBE_API}
@@ -40,10 +40,6 @@ export default class VideoPlayer extends Component {
           style={{alginSelf: 'stretch', height: 250, marginVertical: 5}}
           ref={component => (this._root = component)}
         />
-            <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', flexDirection: 'row', flexWrap: 'wrap' }}>
-            <Button title={play?'Pause':'Play'} onPress={e=>this.setState({play:!this.state.play})}></Button>
-            <Button title="Fullscreen" onPress={e=>this.setState({fullscreen:true})}></Button>
-        </View>
       </View>
     );
   }

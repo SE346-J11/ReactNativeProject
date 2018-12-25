@@ -9,18 +9,13 @@ import {
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
-import {StackNavigator,} from 'react-navigation';
 import Constants from '../utils/Constants';
 
-class Movies extends Component {
-  static navigationOptions = {
-    title: 'Movies',
-  };
-
+class MoviesList extends Component {
   constructor() {
     super();
     this.state = {
-      genderId: '',
+      genderId: '28',
       page: '',
       total_pages: '',
       results: this.listData([{original_language: "en", id: "null"}]),
@@ -29,8 +24,6 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    const {navigation} = this.props;
-    const genderId = navigation.getParam('id', 'NO-ID');
     this.getMoviesFromApi(genderId);
   }
 
@@ -71,7 +64,7 @@ class Movies extends Component {
           //style={styles.container}
           contentContainerStyle={styles.list}
           dataSource={this.state.results}
-          //horizontal={true}
+          horizontal={true}
           renderRow={(rowData) =>
             <TouchableOpacity onPress={() => navigate('detailMovie', {id: rowData.id})}>
               <Image style={{width: width, height: 200, margin: 2}}
@@ -93,7 +86,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    //flexWrap: 'wrap',
     backgroundColor: '#020014',
 
   },
@@ -107,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Movies;
+export default MoviesList;

@@ -13,6 +13,7 @@ import {
 import {StackNavigator,} from 'react-navigation';
 import Constants from '../utils/Constants';
 import Movies from '../Screens/Movies';
+import MoviesList from '../utils/MoviesList';
 
 class Genders extends Component {
   static navigationOptions = {
@@ -75,16 +76,10 @@ class Genders extends Component {
                   onPress={() => navigate('movies', {id: rowData.id})}
                   style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end'}}
                   >
-                  <Text style={{color: '#fff',}}> See all >> </Text>
+                  <Text style={{color: '#fff',}}> More </Text>
                 </TouchableHighlight>
               </View>
-              <View>
-                <TouchableOpacity onPress={() => navigate('movies', { id: rowData.id })}>
-                  <ImageBackground style={[styles.image, { width: Dimensions.get('window').width }, { marginVertical: 2 }]}
-                    source={require("../Avengers.png")} >
-                  </ImageBackground>
-                </TouchableOpacity>
-              </View>
+              
             </View>
           }
         />

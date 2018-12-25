@@ -162,7 +162,7 @@ class DetailMovie extends Component {
             </ImageBackground>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{marginTop: 5, width: '13%', paddingLeft: 4, color: '#fff'}}>Rating: </Text>
+            <Text style={{marginTop: 5, width: '15%', paddingLeft: 4, color: '#fff'}}>Rating: </Text>
             <Rating
               //showRating
               type="star"
@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
     height: 300,
   },
   title: {
-    //padding: 4, 
     color: '#fff',
     fontSize: 25,
     position: 'absolute', 
